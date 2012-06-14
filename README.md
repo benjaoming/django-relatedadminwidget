@@ -9,7 +9,8 @@ Installation:
 
 1. Put relatedwidget folder in your project folder.
 2. Add "relatedwidget" to settings.INSTALLED_APPS
-3. In your other application's admin.py, let the model admins inherit from RelatedWidgetWrapperBase like in this example:
+3. You may want to run your project's ./manage.py collectstatic
+4. In your other application's admin.py, let the model admins inherit from RelatedWidgetWrapperBase like in this example:
 
     from relatedwidget import RelatedWidgetWrapperBase
 
