@@ -94,11 +94,11 @@ class RelatedWidgetWrapperBase(object):
         else:
             return super(RelatedWidgetWrapperBase, self).response_change(request, obj)
 
-class RelatedWidgetWrapperAdmin(admin.ModelAdmin, RelatedWidgetWrapperBase):
+class RelatedWidgetWrapperAdmin(RelatedWidgetWrapperBase, admin.ModelAdmin):
     pass
 
 class RelatedWidgetWrapperTabularInline(RelatedWidgetWrapperBase, admin.TabularInline):
     pass
 
-class RelatedWidgetWrapperStackedInline(admin.StackedInline, RelatedWidgetWrapperBase):
+class RelatedWidgetWrapperStackedInline(RelatedWidgetWrapperBase, admin.StackedInline):
     pass
