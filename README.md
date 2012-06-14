@@ -7,9 +7,11 @@ Widget for displaying edit and delete links alongside foreign key admin widgets
 
 Installation:
 
-1. Put relatedwidget folder in your project folder.
-2. Add "relatedwidget" to settings.INSTALLED_APPS
-3. In your other application's admin.py, let the model admins inherit from RelatedWidgetWrapperBase like in this example:
+1. Install:
+    pip install django-relatedadminwidget
+2. Put relatedwidget folder in your project folder.
+3. Add "relatedwidget" to settings.INSTALLED_APPS
+4. In your other application's admin.py, let the model admins inherit from RelatedWidgetWrapperBase like in this example:
 
     from relatedwidget import RelatedWidgetWrapperBase
 
