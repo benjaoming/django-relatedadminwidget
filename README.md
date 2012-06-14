@@ -3,7 +3,7 @@ django-relatedadminwidget
 
 Widget for displaying edit and delete links alongside foreign key admin widgets
 
-![Flowers](screenshot.png)
+![Flowers](https://github.com/benjaoming/django-relatedadminwidget/raw/master/screenshot.png)
 
 Installation:
 
