@@ -3,6 +3,8 @@ django-relatedadminwidget
 
 Widget for displaying edit and delete links alongside foreign key admin widgets
 
+![Flowers](screenshot.png)
+
 Installation:
 
 1. Put relatedwidget folder in your project folder.
