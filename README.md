@@ -5,7 +5,7 @@ Widget for displaying edit and delete links alongside foreign key admin widgets
 
 ![Flowers](https://github.com/benjaoming/django-relatedadminwidget/raw/master/screenshot.png)
 
-Also see this project: [django-admin-enhancer]
+Also see this project: [django-admin-enhancer](https://github.com/charettes/django-admin-enhancer)
 
 Installation:
 
