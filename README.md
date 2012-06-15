@@ -9,7 +9,7 @@ Also see this project: [django-admin-enhancer](https://github.com/charettes/djan
 
 Installation:
 
-1. **pip install django-relatedadminwidget**
+1. **pip install git+git://github.com/benjaoming/django-relatedadminwidget.git**
 2. Add "relatedwidget" to settings.INSTALLED_APPS
 3. You may want to run your project's ./manage.py collectstatic
 4. In your applications' admin.py, let the model admins inherit from RelatedWidgetWrapperBase like in this example:
