@@ -17,6 +17,8 @@ template_patterns = [
     'static/*.css',
     'static/*/*.js',
     'static/*/*.css',
+    'static/*/*/*.js',
+    'static/*/*/*.css',
 ]
 
 packages = find_packages()
