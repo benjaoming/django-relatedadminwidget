@@ -40,7 +40,7 @@ setup(
     long_description=read('README.md'),
     zip_safe = False,
     install_requires=[
-        'Django>=1.4',
+        'Django>=1.3',
       ],
     classifiers=[
     'Development Status :: 4 - Beta',
