@@ -24,6 +24,11 @@ Installation:
 
 It also works with TabularInline and StackedInline! Remember the order of inheritence, always put RelatedWidgetWrapperBase first!
 
+Troubleshooting
+---------------
+
+If you get a `TemplateDoesNotExist` error on 'relatedwidget/widget.html', you might have to add `django.template.loaders.eggs.Loader` to your `settings.TEMPLATE_LOADERS`.
+
 Credits
 -------
 
