@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import os
 from setuptools import setup, find_packages
 
@@ -16,9 +18,7 @@ media_patterns = ( build_media_pattern("templates", "html") +
                    build_media_pattern("static", "css") +
                    build_media_pattern("static", "png") +
                    build_media_pattern("static", "jpeg") +
-                   build_media_pattern("static", "gif") +
-                   build_media_pattern("", "md") +
-                   build_media_pattern("", "requirements.txt")
+                   build_media_pattern("static", "gif")
 )
 
 packages = find_packages()
