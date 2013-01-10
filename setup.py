@@ -8,29 +8,29 @@ from setuptools import setup, find_packages
 def read(fname):
     return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
+def build_media_pattern(base_folder, file_extension):
+    return ["%s/%s*.%s" % (base_folder, "*/"*x, file_extension) if base_folder else "%s*.%s" % ("*/"*x, file_extension) for x in range(10)]
 
-template_patterns = [
-    'templates/*.html',
-    'templates/*/*.html',
-    'templates/*/*/*.html',
-    'static/*.js',
-    'static/*.css',
-    'static/*/*.js',
-    'static/*/*.css',
-    'static/*/*/*.js',
-    'static/*/*/*.css',
-]
+media_patterns = ( build_media_pattern("templates", "html") +
+                   build_media_pattern("static", "js") +
+                   build_media_pattern("static", "css") +
+                   build_media_pattern("static", "png") +
+                   build_media_pattern("static", "jpeg") +
+                   build_media_pattern("static", "gif") +
+                   build_media_pattern("", "md") +
+                   build_media_pattern("", "requirements.txt")
+)
 
 packages = find_packages()
 
 package_data = dict(
-    (package_name, template_patterns)
+    (package_name, media_patterns)
     for package_name in packages
 )
 
 setup(
     name = "django-relatedadminwidget",
-    version = "0.0.1",
+    version = "0.0.2",
     author = "Benjamin Bach",
     author_email = "benjamin@overtag.dk",
     description = ("Get edit and delete links in your django admin. A utility class to let your model admins inherit from."),
