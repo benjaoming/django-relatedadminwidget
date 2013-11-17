@@ -3,6 +3,7 @@ from django.contrib.admin.widgets import RelatedFieldWidgetWrapper
 from django.core.urlresolvers import reverse
 from django.template.loader import render_to_string
 from django.utils.safestring import mark_safe
+from django.utils.http import urlquote
 from django.utils.translation import ugettext_lazy as _
 
 from django.contrib import admin
@@ -11,25 +12,32 @@ from django.http import HttpResponse
 from django.utils.html import escape, escapejs
 
 class RelatedFieldWidgetWrapper(RelatedFieldWidgetWrapper):
-    
+
     class Media:
         js = ("%srelatedwidget/js/relatedwidget.js" % settings.STATIC_URL,)
-    
+
     def __init__(self, *args, **kwargs):
         self.can_change_related = kwargs.pop('can_change_related', None)
         self.can_delete_related = kwargs.pop('can_delete_related', None)
         super(RelatedFieldWidgetWrapper, self).__init__(*args, **kwargs)
-    
+
     @classmethod
     def from_contrib_wrapper(cls, wrapper, can_change_related, can_delete_related):
         return cls(wrapper.widget, wrapper.rel, wrapper.admin_site,
                    can_add_related=wrapper.can_add_related,
                    can_change_related=can_change_related,
                    can_delete_related=can_delete_related)
-    
+
     def get_related_url(self, rel_to, info, action, args=[]):
         return reverse("admin:%s_%s_%s" % (info + (action,)), current_app=self.admin_site.name, args=args)
-    
+
+    def get_related_url_template(self, rel_to, info):
+        template = self.get_related_url(rel_to, info, 'change', ['%s'])
+        format_substring = urlquote('%s')
+        # Replace urlquoted '%s' with %s so that URL template is a correct
+        # format string.
+        return template.replace(format_substring, '%s')
+
     def render(self, name, value, attrs={}, *args, **kwargs):
         rel_to = self.rel.to
         info = (rel_to._meta.app_label, rel_to._meta.object_name.lower())
@@ -44,7 +52,7 @@ class RelatedFieldWidgetWrapper(RelatedFieldWidgetWrapper):
         if self.can_change_related:
             if value:
                 context['change_url'] = self.get_related_url(rel_to, info, 'change', [value])
-            template = self.get_related_url(rel_to, info, 'change', ['%s'])
+            template = self.get_related_url_template(rel_to, info)
             context.update({
                             'change_url_template': template,
                             'change_help_text': _('Change related model')
@@ -62,10 +70,10 @@ class RelatedFieldWidgetWrapper(RelatedFieldWidgetWrapper):
                             'delete_url_template': template,
                             'delete_help_text': _('Delete related model')
                             })
-        
+
         return mark_safe(render_to_string('relatedwidget/widget.html', context))
-    
-    
+
+
 class RelatedWidgetWrapperBase(object):
 
     def formfield_for_dbfield(self, db_field, **kwargs):

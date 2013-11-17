@@ -28,27 +28,30 @@ if (!dismissAddAnotherPopup.original) {
 }
 
 django.jQuery(document).ready(function() {
-  
+
   var $ = $ || jQuery || django.jQuery,
   		relatedWidgetCSSSelector = '.related-widget-wrapper-change-link, .related-widget-wrapper-delete-link',
   		hrefTemplateAttr = 'data-href-template';
-  
-  $('.related-widget-wrapper').live('change', function(){
-  	var siblings = $(this).nextAll(relatedWidgetCSSSelector);
-  	if (!siblings.length) return;
-  	if (this.value) {
-  		var val = this.value;
-  		siblings.each(function(){
-  			var elm = $(this);
-  			elm.attr('href', interpolate(elm.attr(hrefTemplateAttr), [val]));
-  		});
-  	} else siblings.removeAttr('href');
+
+  $('body').on('change', '.related-widget-wrapper', function(){
+    var siblings = $(this).nextAll(relatedWidgetCSSSelector);
+    if (!siblings.length) return;
+    if (this.value) {
+        var val = this.value;
+        siblings.each(function(){
+            var elm = $(this);
+            elm.attr('href', interpolate(elm.attr(hrefTemplateAttr), [val]));
+        });
+    }
+    else {
+        siblings.removeAttr('href');
+    }
   });
-	
-	$('.related-widget-wrapper-link').live('click', function(){
+
+	$('body').on('click', '.related-widget-wrapper-link', function(){
 		if (this.href) {
 			return showAddAnotherPopup(this);
 		} else return false;
 	});
-  
+
 });
