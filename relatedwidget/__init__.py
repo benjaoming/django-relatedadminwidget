@@ -31,11 +31,11 @@ class RelatedFieldWidgetWrapper(RelatedFieldWidgetWrapper):
     def get_related_url(self, rel_to, info, action, args=[]):
         return reverse("admin:%s_%s_%s" % (info + (action,)), current_app=self.admin_site.name, args=args)
 
-    def get_related_url_template(self, rel_to, info):
-        template = self.get_related_url(rel_to, info, 'change', ['%s'])
+    def get_related_url_template(self, rel_to, info, action):
+        template = self.get_related_url(rel_to, info, action, ['%s'])
         format_substring = urlquote('%s')
-        # Replace urlquoted '%s' with %s so that URL template is a correct
-        # format string.
+        # Replace urlquoted '%s' if it exists (on Django 1.6+) with %s so that
+        # URL template is a correct format string.
         return template.replace(format_substring, '%s')
 
     def render(self, name, value, attrs={}, *args, **kwargs):
@@ -52,7 +52,7 @@ class RelatedFieldWidgetWrapper(RelatedFieldWidgetWrapper):
         if self.can_change_related:
             if value:
                 context['change_url'] = self.get_related_url(rel_to, info, 'change', [value])
-            template = self.get_related_url_template(rel_to, info)
+            template = self.get_related_url_template(rel_to, info, 'change')
             context.update({
                             'change_url_template': template,
                             'change_help_text': _('Change related model')
@@ -65,7 +65,7 @@ class RelatedFieldWidgetWrapper(RelatedFieldWidgetWrapper):
         if self.can_delete_related:
             if value:
                 context['delete_url'] = self.get_related_url(rel_to, info, 'delete', [value])
-            template = self.get_related_url(rel_to, info, 'delete', ['%s'])
+            template = self.get_related_url_template(rel_to, info, 'delete')
             context.update({
                             'delete_url_template': template,
                             'delete_help_text': _('Delete related model')
