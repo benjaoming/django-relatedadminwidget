@@ -11,6 +11,9 @@
 # Python
 #
 
+dist
+*egg-info
+
 # Compiled Python file
 *.pyc
 
