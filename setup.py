@@ -30,7 +30,7 @@ package_data = dict(
 
 setup(
     name = "django-relatedadminwidget",
-    version = "0.0.2",
+    version = "0.0.3",
     author = "Benjamin Bach",
     author_email = "benjamin@overtag.dk",
     description = ("Get edit and delete links in your django admin. A utility class to let your model admins inherit from."),
