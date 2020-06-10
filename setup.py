@@ -30,7 +30,7 @@ package_data = dict(
 
 setup(
     name = "django-relatedadminwidget",
-    version = "0.0.3",
+    version = "0.1",
     url = "https://github.com/benjaoming/django-relatedadminwidget",
     author = "Benjamin Bach",
     author_email = "benjamin@overtag.dk",
@@ -41,7 +41,7 @@ setup(
     long_description=read('README.md'),
     zip_safe = False,
     install_requires=[
-        'Django>=1.3',
+        'Django>=2.0',
       ],
     classifiers=[
     'Development Status :: 4 - Beta',
